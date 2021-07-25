@@ -1,7 +1,11 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<SpinnerContainer/>
 
-Welcome to your new app.
+<h1>Blazor spinner Demo</h1>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="row">
+    <button type="button" class="btn btn-primary mr-3" @onclick="StartSpinner">Start Spinner</button>
+    <button type="button" class="btn btn-primary" @onclick="StopSpinner">Stop Spinner</button>
+</div>
+
