@@ -1,4 +1,3 @@
-using BlazorSpinner.Demo.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -29,8 +28,7 @@ namespace BlazorSpinner.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddServerSideBlazor();            
             services.AddBlazorSpinner();
         }
 
