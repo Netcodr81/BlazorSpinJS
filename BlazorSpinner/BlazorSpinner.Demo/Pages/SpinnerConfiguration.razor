@@ -14,10 +14,11 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="lines">Lines</label>
-                                <input type="text" class="form-control" id="lines" @bind="SpinnerOptions.Lines">
+
+                                <input type="text" class="form-control" id="lines" @bind-value="@SpinnerOptions.Lines">
                             </div>
                             <div class="form-group">
-                                <label for="length">Length</label>                               
+                                <label for="length">Length</label>
                                 <input type="text" class="form-control" id="length" @bind="SpinnerOptions.Length">
                             </div>
                             <div class="form-group">
@@ -89,14 +90,14 @@
                         </div>
                     </div>
 
-
-
                 </form>
+
+
             </div>
             <div class="row justify-content-center mt-5">
-                <button type="button" class="btn btn-outline-dark mr-3" @onclick="StartSpinner">Start Spinner</button>
-                <button type="button" class="btn btn-outline-info mr-3" @onclick="StopSpinner">Stop Spinner</button>
-              @*  <button type="button" class="btn btn-outline-danger" @onclick="ResetValues">Reset Spinner</button>*@
+                <button type="button" class="btn btn-outline-dark mr-3" @onclick="StartSpinner" disabled="@StartDisabled">Start Spinner</button>
+                <button type="button" class="btn btn-outline-info mr-3" @onclick="StopSpinner" disabled="@StopDisabled">Stop Spinner</button>
+                <button type="button" class="btn btn-outline-danger" @onclick="ResetValues" disabled="@ResetDisabled">Reset Spinner</button>
             </div>
         </div>
     </div>

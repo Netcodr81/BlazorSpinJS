@@ -5,22 +5,47 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
+using BlazorSpinner.Utils;
 
 namespace BlazorSpinner.Components
 {
+
     public partial class SpinnerContainer : ComponentBase, IDisposable
+
     {
         private string SpinnerId { get; set; }
 
         private IJSObjectReference _jsModule;
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
             SpinnerId = "spinner" + Guid.NewGuid();
             SpinnerService.Spin += Spin;
             SpinnerService.NoSpin += Stop;
+            SpinnerService.SetSpinner += ResetSpinner;
             NavigationManager.LocationChanged += LocationChanged;
 
+            if (SpinnerOptions == null)
+            {
+                SpinnerOptions = new SpinnerOptions();
+            }
+            else
+            {
+                OriginalSpinnerOptions = Mapper.MapOptions(SpinnerOptions, IsFixed);
+
+            }
+
+
+        }
+
+        protected override void OnParametersSet()
+        {
+            if (IsFixed)
+            {
+                SpinnerOptions.Position = "fixed";
+            }
+
+            
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -46,15 +71,22 @@ namespace BlazorSpinner.Components
         #region Properties
         private bool SpinnerSpinning = false;
 
+        public SpinnerOptions OriginalSpinnerOptions { get; set; } = new SpinnerOptions();
+
         #endregion
 
 
         #region Parameters
-        [CascadingParameter]
-        public SpinnerOptions SpinnerOptions { get; set; } = new SpinnerOptions();
+        [Parameter]
+        public SpinnerOptions SpinnerOptions { get; set; } 
+
 
         [Parameter] 
         public RenderFragment ChildContent { get; set; }
+
+        [Parameter] 
+        public bool IsFixed { get; set; }
+
         #endregion
 
         #region Methods
@@ -77,10 +109,17 @@ namespace BlazorSpinner.Components
 
         }
 
+        public void ResetSpinner()
+        {
+            Mapper.UpdateOptions(SpinnerOptions, OriginalSpinnerOptions);
+            InvokeAsync(StateHasChanged);
+        }
+
         public void Dispose()
         {
             SpinnerService.Spin -= Spin;
             SpinnerService.NoSpin -= Stop;
+            SpinnerService.SetSpinner -= ResetSpinner;
             NavigationManager.LocationChanged -= LocationChanged;
         }
 

@@ -26,12 +26,14 @@ export class BlazorSpin {
         zIndex: 2000000000, // The z-index (defaults to 2e9)
         className: 'spinner', // The CSS class to assign to the spinner
         position: 'absolute', // Element positioning
-    };
+    }
 
     Spin(target, options) {
 
         this.UpdateOptions(options);
         let spinTarget = document.getElementById(target);
+
+        console.log(options);
 
         if (this.isSpining) {
             this.Stop();
@@ -42,12 +44,12 @@ export class BlazorSpin {
         }
 
         this.isSpining = true;
-    };
+    }
 
     Stop() {     
         this.spinner.stop();
         this.isSpining = false;
-    };
+    }
 
     UpdateOptions(options) {
         this.opts.lines = options.lines;

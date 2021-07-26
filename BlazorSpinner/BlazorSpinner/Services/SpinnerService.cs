@@ -11,11 +11,13 @@ namespace BlazorSpinner.Services
 {
     public class SpinnerService : ISpinnerService
     {           
-        public SpinnerOptions SpinnerOptions { get; set; }
+        //public SpinnerOptions SpinnerOptions { get; set; }
 
         public event Action Spin;
 
         public event Action NoSpin;
+
+        public event Action SetSpinner;
 
         public void StartSpinner()
         {
@@ -25,6 +27,11 @@ namespace BlazorSpinner.Services
         public void StopSpinner()
         {
             NoSpin?.Invoke();
+        }
+
+        public void ResetSpinner()
+        {
+            SetSpinner?.Invoke();
         }
     }
 }
