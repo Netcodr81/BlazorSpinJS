@@ -7,15 +7,26 @@ namespace BlazorSpinner.Demo.Pages
     {
         [Inject]
         public ISpinnerService SpinnerService { get; set; }
+        private bool IsSpinning = false;
 
         private void StartSpinner()
         {
-            SpinnerService.StartSpinner();
+            if (!IsSpinning)
+            {
+                SpinnerService.StartSpinner();
+                IsSpinning = !IsSpinning;
+            }
+           
         }
 
         private void StopSpinner()
         {
-            SpinnerService.StopSpinner();
+            if (IsSpinning)
+            {
+                SpinnerService.StopSpinner();
+                IsSpinning = !IsSpinning;
+            }
+           
         }
     }
 

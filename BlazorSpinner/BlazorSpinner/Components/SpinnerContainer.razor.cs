@@ -1,6 +1,7 @@
 ﻿using BlazorSpinner.Configuration;
 using BlazorSpinner.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace BlazorSpinner.Components
             SpinnerId = "spinner" + Guid.NewGuid();
             SpinnerService.Spin += Spin;
             SpinnerService.NoSpin += Stop;
+            NavigationManager.LocationChanged += LocationChanged;
 
         }
 
@@ -36,6 +38,9 @@ namespace BlazorSpinner.Components
 
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        NavigationManager NavigationManager { get; set; }
         #endregion
 
         #region Properties
@@ -45,15 +50,21 @@ namespace BlazorSpinner.Components
 
 
         #region Parameters
-        [Parameter]
+        [CascadingParameter]
         public SpinnerOptions SpinnerOptions { get; set; } = new SpinnerOptions();
+
+        [Parameter] 
+        public RenderFragment ChildContent { get; set; }
         #endregion
 
         #region Methods
         public void Stop()
         {
-            _jsModule.InvokeVoidAsync("DefaultSpinner.Stop");
-            SpinnerSpinning = !SpinnerSpinning;
+            if (SpinnerSpinning)
+            {
+                _jsModule.InvokeVoidAsync("DefaultSpinner.Stop");
+                SpinnerSpinning = !SpinnerSpinning;
+            }           
         }
 
         public void Spin()
@@ -70,7 +81,14 @@ namespace BlazorSpinner.Components
         {
             SpinnerService.Spin -= Spin;
             SpinnerService.NoSpin -= Stop;
+            NavigationManager.LocationChanged -= LocationChanged;
         }
+
+        void LocationChanged(object sender, LocationChangedEventArgs e)
+        {
+            Stop();
+        }
+
         #endregion
 
 

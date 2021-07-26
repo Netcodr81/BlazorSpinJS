@@ -1,5 +1,103 @@
 ﻿@page "/spinner/config"
 
-@code {
+<h1 class="text-center mt-3">Blazor spinner Demo</h1>
 
-}
+
+<div class="container">
+    <div class="card mt-5">
+        <h5 class="card-header text-center">Default Spinner</h5>
+        <div class="card-body p-5">
+
+            <div class="row justify-content-center">
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="lines">Lines</label>
+                                <input type="text" class="form-control" id="lines" @bind="SpinnerOptions.Lines">
+                            </div>
+                            <div class="form-group">
+                                <label for="length">Length</label>                               
+                                <input type="text" class="form-control" id="length" @bind="SpinnerOptions.Length">
+                            </div>
+                            <div class="form-group">
+                                <label for="width">Width</label>
+                                <input type="text" class="form-control" id="width" @bind="SpinnerOptions.Width">
+                            </div>
+                            <div class="form-group">
+                                <label for="radius">Radius</label>
+                                <input type="number" class="form-control" id="radius" @bind-value="SpinnerOptions.Radius">
+                            </div>
+                            <div class="form-group">
+                                <label for="scale">Scale</label>
+                                <input type="number" class="form-control" id="scale" @bind="SpinnerOptions.Scale">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="corners">Corners</label>
+                                <input type="number" class="form-control" id="corners" @bind="SpinnerOptions.Corners">
+                            </div>
+                            <div class="form-group">
+                                <label for="speed">Speed</label>
+                                <input type="number" class="form-control" id="speed" @bind="SpinnerOptions.Speed">
+                            </div>
+                            <div class="form-group">
+                                <label for="rotate">Rotate</label>
+                                <input type="number" class="form-control" id="rotate" @bind="SpinnerOptions.Rotate">
+                            </div>
+                            <div class="form-group">
+                                <label for="animation">Animation</label>
+                                <select id="animation" class="form-control" @bind="SpinnerOptions.Animation">
+                                    @foreach (var item in Animations)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="direction">Direction</label>
+                                <select class="form-control" @bind="SpinnerOptions.Direction">
+                                    @foreach (var item in SpinDirection)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="color">Color</label>
+                                <input type="text" class="form-control" id="color" @bind="SpinnerOptions.Color">
+                            </div>
+                            <div class="form-group">
+                                <label for="fade-color">Fade Color</label>
+                                <input type="text" class="form-control" id="fade-color" @bind="SpinnerOptions.FadeColor">
+                            </div>
+                            <div class="form-group">
+                                <label for="top">Top</label>
+                                <input type="text" class="form-control" id="top" @bind="SpinnerOptions.Top">
+                            </div>
+                            <div class="form-group">
+                                <label for="left">Left</label>
+                                <input type="text" class="form-control" id="left" @bind="SpinnerOptions.Left">
+                            </div>
+                            <div class="form-group">
+                                <label for="shadow">Shadow</label>
+                                <input type="text" class="form-control" id="shadow" @bind="SpinnerOptions.Shadow">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <button type="button" class="btn btn-outline-dark mr-3" @onclick="StartSpinner">Start Spinner</button>
+                <button type="button" class="btn btn-outline-info mr-3" @onclick="StopSpinner">Stop Spinner</button>
+              @*  <button type="button" class="btn btn-outline-danger" @onclick="ResetValues">Reset Spinner</button>*@
+            </div>
+        </div>
+    </div>
+</div>
