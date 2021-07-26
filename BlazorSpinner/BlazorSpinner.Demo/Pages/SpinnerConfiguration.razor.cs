@@ -4,10 +4,15 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BlazorSpinner.Demo.Pages
 {
@@ -36,6 +41,10 @@ namespace BlazorSpinner.Demo.Pages
 
         public bool ResetDisabled { get; set; } = false;
 
+        public bool DownloadDisabled { get; set; } = false;
+
+        public bool FormDisabled { get; set; } = false;
+
 
         protected override void OnInitialized()
         {
@@ -60,6 +69,8 @@ namespace BlazorSpinner.Demo.Pages
                 StopDisabled = false;
                 ResetDisabled = true;
                 StartDisabled = true;
+                DownloadDisabled = true;
+                FormDisabled = true;
             }
          
         }
@@ -73,6 +84,8 @@ namespace BlazorSpinner.Demo.Pages
                 StopDisabled = false;
                 ResetDisabled = false;
                 StartDisabled = false;
+                DownloadDisabled = false;
+                FormDisabled = false;
             }
          
         }  
@@ -89,6 +102,14 @@ namespace BlazorSpinner.Demo.Pages
         private void Alert(string message)
         {
             JSRuntime.InvokeVoidAsync("window.alert", message);
+        }
+
+        //https://wellsb.com/csharp/aspnet/blazor-jsinterop-save-file/
+        private void DownloadValues()
+        {
+            var fileContent = JsonConvert.SerializeObject(SpinnerOptions);
+
+            JSRuntime.InvokeAsync<object>("FileSaveAsJson", "SpinnerSettings.json", fileContent);
         }
     }
 }

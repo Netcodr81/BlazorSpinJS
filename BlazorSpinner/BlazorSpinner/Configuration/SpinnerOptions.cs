@@ -92,7 +92,7 @@ namespace BlazorSpinner.Configuration
         /// <summary>
         ///  CSS color or array of colors
         /// </summary>
-        public string FadeColor { get; set; } = "transparent";
+        public string FadeColor { get; set; } = "#e3e3e3";
 
         /// <summary>
         ///  Top position relative to parent
