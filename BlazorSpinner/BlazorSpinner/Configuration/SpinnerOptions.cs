@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace BlazorSpinner.Configuration
 {
@@ -15,8 +10,8 @@ namespace BlazorSpinner.Configuration
         }
 
         public SpinnerOptions(int? lines, int? length, int? width, int? radius, int? scale, 
-                              int? corners, int? speed, int? rotate, string animation, 
-                              int? direction, string color, string fadeColor, string top,
+                              int? corners, int? speed, int? rotate, Animation animation, 
+                              SpinDirection direction, string color, string fadeColor, string top,
                               string left, string shadow, long? zIndex, string className, string position)
         {
             Lines = lines != null ? lines.Value : Lines;
@@ -27,7 +22,7 @@ namespace BlazorSpinner.Configuration
             Corners = corners != null ? corners.Value : Corners;
             Speed = speed != null ? speed.Value : Speed;
             Rotate = rotate != null ? rotate.Value : Rotate;
-            Animation = !string.IsNullOrEmpty(animation) ? animation : Animation;
+            Animation = animation != null ? animation.Value : Animation;
             Direction = direction != null ? direction.Value : Direction;
             Color = !string.IsNullOrEmpty(color) ? color : Color;
             FadeColor = !string.IsNullOrEmpty(fadeColor) ? fadeColor : FadeColor;
@@ -47,12 +42,12 @@ namespace BlazorSpinner.Configuration
         /// <summary>
         ///  The length of each line
         /// </summary>
-        public int Length { get; set; } = 38;
+        public int Length { get; set; } = 20;
 
         /// <summary>
         ///  The line thickness
         /// </summary>
-        public int Width { get; set; } = 17;
+        public int Width { get; set; } = 10;
 
         /// <summary>
         ///  The radius of the inner circle

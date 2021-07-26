@@ -29,7 +29,7 @@ namespace BlazorSpinner.Demo
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();            
-            services.AddBlazorSpinner();
+            services.AddBlazorSpinner();         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
