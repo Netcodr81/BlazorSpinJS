@@ -1,0 +1,105 @@
+﻿@page "/spinner/config"
+
+<h1 class="text-center mt-3">Blazor spinner Demo</h1>
+
+
+<div class="container">
+    <div class="card mt-5">
+        <h5 class="card-header text-center">Default Spinner</h5>
+        <div class="card-body p-5">
+
+            <div class="row justify-content-center">
+                <form>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="lines">Lines</label>
+
+                                <input type="text" class="form-control" id="lines" @bind-value="@SpinnerOptions.Lines" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="length">Length</label>
+                                <input type="text" class="form-control" id="length" @bind="SpinnerOptions.Length" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="width">Width</label>
+                                <input type="text" class="form-control" id="width" @bind="SpinnerOptions.Width" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="radius">Radius</label>
+                                <input type="number" class="form-control" id="radius" @bind-value="SpinnerOptions.Radius" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="scale">Scale</label>
+                                <input type="number" class="form-control" id="scale" @bind="SpinnerOptions.Scale" disabled="@FormDisabled">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="corners">Corners</label>
+                                <input type="number" class="form-control" id="corners" @bind="SpinnerOptions.Corners" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="speed">Speed</label>
+                                <input type="number" class="form-control" id="speed" @bind="SpinnerOptions.Speed" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="rotate">Rotate</label>
+                                <input type="number" class="form-control" id="rotate" @bind="SpinnerOptions.Rotate" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="animation">Animation</label>
+                                <select id="animation" class="form-control" @bind="SpinnerOptions.Animation" disabled="@FormDisabled">
+                                    @foreach (var item in Animations)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="direction">Direction</label>
+                                <select id="direction" class="form-control" @bind="SpinnerOptions.Direction" disabled="@FormDisabled">
+                                    @foreach (var item in SpinDirection)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="color">Color</label>
+                                <input type="color" class="form-control" id="color" @bind="SpinnerOptions.Color" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="fade-color">Fade Color</label>
+                                <input type="color" class="form-control" id="fade-color" @bind="SpinnerOptions.FadeColor" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="top">Top</label>
+                                <input type="text" class="form-control" id="top" @bind="SpinnerOptions.Top" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="left">Left</label>
+                                <input type="text" class="form-control" id="left" @bind="SpinnerOptions.Left" disabled="@FormDisabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="shadow">Shadow</label>
+                                <input type="text" class="form-control" id="shadow" @bind="SpinnerOptions.Shadow" disabled="@FormDisabled">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </div>
+            <div class="row justify-content-center mt-5">
+                <button type="button" class="btn btn-outline-dark mr-3" @onclick="StartSpinner" disabled="@StartDisabled">Start Spinner</button>
+                <button type="button" class="btn btn-outline-info mr-3" @onclick="StopSpinner" disabled="@StopDisabled">Stop Spinner</button>
+                <button type="button" class="btn btn-outline-danger mr-3" @onclick="ResetValues" disabled="@ResetDisabled">Reset Spinner</button>
+                <button type="button" class="btn btn-outline-primary" @onclick="DownloadValues" disabled="@DownloadDisabled">Download Values</button>
+            </div>
+        </div>
+    </div>
+</div>
