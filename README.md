@@ -2,8 +2,6 @@
 
 A spinner component built upon the [spin.js](https://spin.js.org/) package
 
-Integration instructions coming soon
-
 ## Getting Started
 
 You can install the package via NugGet package manager just search for *BlazorSpinJS*. You can also intall via powershell using the following command.
