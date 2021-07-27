@@ -1,6 +1,12 @@
-# BlazorSpinJS
+# BlazorSpinJS  projects
 
-A spinner component built upon the [spin.js](https://spin.js.org/) package
+A spinner component built upon the [spin.js](https://spin.js.org/) package. A demo can be found in the *BlazorSpinJS.Server.Demo* and *BlazorSpinJS.WASM.Demo*
+
+![Default Spinner Demo](https://user-images.githubusercontent.com/16604626/127219103-db49d989-4901-4d75-a53c-05acb78ed648.PNG)
+
+![Default Configuration Demo](https://user-images.githubusercontent.com/16604626/127219132-72825f14-00f6-404d-9c7e-7655da545b5b.PNG)
+
+
 
 ## Getting Started
 
