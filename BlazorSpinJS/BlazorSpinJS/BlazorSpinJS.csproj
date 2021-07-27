@@ -5,8 +5,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Mike Eckel</Authors>
     <Company>Netcodr</Company>
-    <PackageProjectUrl>https://github.com/Netcodr81/BlazorSpinner</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Netcodr81/BlazorSpinner</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Netcodr81/BlazorSpinJS</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Netcodr81/BlazorSpinJS</RepositoryUrl>
     <PackageIcon>NetcordIcon48px.png</PackageIcon>
     <PackageIconUrl />
     <Description>BlazorSpinner is a spinner component based on the spin.js javascript package</Description>
