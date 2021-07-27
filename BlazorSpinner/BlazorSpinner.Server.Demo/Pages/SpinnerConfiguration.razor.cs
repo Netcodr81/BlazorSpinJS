@@ -14,7 +14,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace BlazorSpinner.Demo.Pages
+namespace BlazorSpinner.Server.Demo.Pages
 {
     public partial class SpinnerConfiguration : ComponentBase
     {

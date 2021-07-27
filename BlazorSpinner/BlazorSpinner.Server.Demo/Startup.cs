@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorSpinner.Services;
 
-namespace BlazorSpinner.Demo
+namespace BlazorSpinner.Server.Demo
 {
     public class Startup
     {

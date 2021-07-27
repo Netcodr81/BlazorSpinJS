@@ -1,7 +1,7 @@
 ﻿using BlazorSpinner.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorSpinner.Demo.Pages
+namespace BlazorSpinner.Server.Demo.Pages
 {
     public partial class Index : ComponentBase
     {

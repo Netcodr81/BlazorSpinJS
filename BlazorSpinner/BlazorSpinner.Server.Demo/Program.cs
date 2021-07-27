@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorSpinner.Demo
+namespace BlazorSpinner.Server.Demo
 {
     public class Program
     {
