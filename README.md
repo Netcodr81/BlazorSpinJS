@@ -7,12 +7,12 @@ A spinner component built upon the [spin.js](https://spin.js.org/) package
 You can install the package via NugGet package manager just search for *BlazorSpinJS*. You can also intall via powershell using the following command.
 
 ```powershell
-Install-Package BlazorSpin
+Install-Package BlazorSpinJS -Version 1.0.0
 ```
 Or via the dotnet CLI.
 
 ```bash
-dotnet add package BlazorSpinJS
+dotnet add package BlazorSpinJS --version 1.0.0
 ```
 
 ### 1. Register Services
