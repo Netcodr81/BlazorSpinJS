@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpinner", "BlazorSpin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpinner.Server.Demo", "BlazorSpinner.Server.Demo\BlazorSpinner.Server.Demo.csproj", "{CAABC75C-F906-4010-ACC7-00B82A953CAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSpinner.WASM.Demo", "BlazorSpinner.WASM.Demo\BlazorSpinner.WASM.Demo.csproj", "{F5C3B2C5-DE6D-480A-9B55-1D5CEFB931E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSpinner.WASM.Demo", "BlazorSpinner.WASM.Demo\BlazorSpinner.WASM.Demo.csproj", "{DAABAEFE-CBDE-41C3-A974-668DAF829278}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{CAABC75C-F906-4010-ACC7-00B82A953CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAABC75C-F906-4010-ACC7-00B82A953CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAABC75C-F906-4010-ACC7-00B82A953CAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5C3B2C5-DE6D-480A-9B55-1D5CEFB931E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5C3B2C5-DE6D-480A-9B55-1D5CEFB931E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5C3B2C5-DE6D-480A-9B55-1D5CEFB931E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5C3B2C5-DE6D-480A-9B55-1D5CEFB931E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAABAEFE-CBDE-41C3-A974-668DAF829278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAABAEFE-CBDE-41C3-A974-668DAF829278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAABAEFE-CBDE-41C3-A974-668DAF829278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAABAEFE-CBDE-41C3-A974-668DAF829278}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
