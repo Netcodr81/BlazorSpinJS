@@ -92,7 +92,7 @@ Spinner position - you can make the spinner stay fixed in the middle of the scre
 </SpinnerContainer>
 ```
 
-You can configure the following spinner settings
+You can configure any of the following spinner settings
 
 - Lines
 - Length
@@ -115,9 +115,25 @@ You can configure the following spinner settings
 by injecting a `SpinnerOptions` class into the *SpinnerOptions* parameter
 
 ```csharp
-<SpinnerContainer IsFixed="true" SpinnerOptions="@(new SpinnerOptions(){Color="#800000", 
+<SpinnerContainer IsFixed="true" SpinnerOptions="@(new SpinnerOptions(){
+                                                     Lines= 1,
+                                                     Length = 13,
+                                                     Width = 6,
+                                                     Radius = 12,
+                                                     Scale = 1,
+                                                     Corners = 1,
+                                                     Speed = 1,
+                                                     Rotate = 10,
                                                      Animation = Animation.FadeDefault.Value, 
-                                                     Direction = SpinDirection.CounterClockwise.Value})">
+                                                     Direction = SpinDirection.CounterClockwise.Value,
+                                                     Color="#800000", 
+                                                     FadeColor = "#FFFFFF",
+                                                     Top = "50%",
+                                                     Left = "50%",
+                                                     Shadow = "0 0 1px transparent",
+                                                     ZIndex = 200000000000,
+                                                     ClassName = "spinner"
+                                                 })">
     <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
         <Found Context="routeData">
             <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
