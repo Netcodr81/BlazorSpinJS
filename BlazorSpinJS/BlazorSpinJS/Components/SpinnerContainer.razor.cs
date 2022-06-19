@@ -1,135 +1,130 @@
-﻿using BlazorSpinJS.Configuration;
-using BlazorSpinJS.Services;
+﻿using BlazorSpinJS.Services;
+using BlazorSpinJS.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
-using BlazorSpinJS.Utils;
 
-namespace BlazorSpinJS.Components
+namespace BlazorSpinJS.Components;
+
+public partial class SpinnerContainer : ComponentBase, IDisposable
+
 {
+    private string SpinnerId { get; set; }
 
-    public partial class SpinnerContainer : ComponentBase, IDisposable
+    private IJSObjectReference _jsModule;
 
+    protected override void OnInitialized()
     {
-        private string SpinnerId { get; set; }
+        SpinnerId = "spinner" + Guid.NewGuid();
+        SpinnerService.Spin += Spin;
+        SpinnerService.DynamicConfigSpin += Spin;
+        SpinnerService.NoSpin += Stop;
+        SpinnerService.SetSpinner += ResetSpinner;
+        NavigationManager.LocationChanged += LocationChanged;
 
-        private IJSObjectReference _jsModule;
-
-        protected override void OnInitialized()
-        {
-            SpinnerId = "spinner" + Guid.NewGuid();
-            SpinnerService.Spin += Spin;
-            SpinnerService.NoSpin += Stop;
-            SpinnerService.SetSpinner += ResetSpinner;
-            NavigationManager.LocationChanged += LocationChanged;
-
-            if (SpinnerOptions == null)
-            {
-                SpinnerOptions = new SpinnerOptions();
-            }
-            else
-            {
-                OriginalSpinnerOptions = Mapper.MapOptions(SpinnerOptions, IsFixed);
-
-            }
+        var spinner = SpinnerOptionsService.GetSpinner();
 
 
-        }
 
-        protected override void OnParametersSet()
-        {
-            if (IsFixed)
-            {
-                SpinnerOptions.Position = "fixed";
-            }
-
-            
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorSpinJS/blazor-spin.js");
-                await _jsModule.InvokeVoidAsync("Initialize");
-            }
-        }
-
-        #region DI
-        [Inject]
-        public ISpinnerService SpinnerService { get; set; }
-
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-
-        [Inject]
-        NavigationManager NavigationManager { get; set; }
-        #endregion
-
-        #region Properties
-        private bool SpinnerSpinning = false;
-
-        public SpinnerOptions OriginalSpinnerOptions { get; set; } = new SpinnerOptions();
-
-        #endregion
-
-
-        #region Parameters
-        [Parameter]
-        public SpinnerOptions SpinnerOptions { get; set; } 
-
-
-        [Parameter] 
-        public RenderFragment ChildContent { get; set; }
-
-        [Parameter] 
-        public bool IsFixed { get; set; }
-
-        #endregion
-
-        #region Methods
-        public void Stop()
-        {
-            if (SpinnerSpinning)
-            {
-                _jsModule.InvokeVoidAsync("DefaultSpinner.Stop");
-                SpinnerSpinning = !SpinnerSpinning;
-            }           
-        }
-
-        public void Spin()
-        {
-            if (!SpinnerSpinning)
-            {
-                _jsModule.InvokeVoidAsync("DefaultSpinner.Spin", SpinnerId, SpinnerOptions);
-                SpinnerSpinning = !SpinnerSpinning;
-            }
-
-        }
-
-        public void ResetSpinner()
-        {
-            Mapper.UpdateOptions(SpinnerOptions, OriginalSpinnerOptions);
-            InvokeAsync(StateHasChanged);
-        }
-
-        public void Dispose()
-        {
-            SpinnerService.Spin -= Spin;
-            SpinnerService.NoSpin -= Stop;
-            SpinnerService.SetSpinner -= ResetSpinner;
-            NavigationManager.LocationChanged -= LocationChanged;
-        }
-
-        void LocationChanged(object sender, LocationChangedEventArgs e)
-        {
-            Stop();
-        }
-
-        #endregion
-
+        OriginalSpinner = spinner;
 
     }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorSpinJS/blazor-spin.js");
+            await _jsModule.InvokeVoidAsync("Initialize");
+        }
+    }
+
+    #region DI
+    [Inject]
+    public ISpinnerService SpinnerService { get; set; }
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+
+    [Inject]
+    public ISpinnerOptionsService SpinnerOptionsService { get; set; }
+    #endregion
+
+    #region Properties
+
+    private bool SpinnerSpinning = false;
+
+    public Spinner OriginalSpinner { get; set; } = new Spinner();
+
+    #endregion
+
+
+    #region Parameters
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+    #endregion
+
+    #region Methods
+    public void Stop()
+    {
+        if (SpinnerSpinning)
+        {
+            _jsModule.InvokeVoidAsync("DefaultSpinner.Stop");
+            SpinnerSpinning = !SpinnerSpinning;
+        }
+    }
+
+    public void Spin()
+    {
+        if (!SpinnerSpinning)
+        {
+            _jsModule.InvokeVoidAsync("DefaultSpinner.Spin", SpinnerId, OriginalSpinner);
+            SpinnerSpinning = !SpinnerSpinning;
+        }
+
+    }
+
+    public void Spin(Spinner updatedOptions)
+    {
+        if (!SpinnerSpinning)
+        {
+            _jsModule.InvokeVoidAsync("DefaultSpinner.Spin", SpinnerId, updatedOptions);
+            SpinnerSpinning = !SpinnerSpinning;
+        }
+
+    }
+
+    public void ResetSpinner(Spinner spinnerToReset)
+    {
+        Mapper.UpdateSpinner(spinnerToReset, OriginalSpinner);
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        SpinnerService.Spin -= Spin;
+        SpinnerService.DynamicConfigSpin -= Spin;
+        SpinnerService.NoSpin -= Stop;
+        SpinnerService.SetSpinner -= ResetSpinner;
+        NavigationManager.LocationChanged -= LocationChanged;
+    }
+
+    void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        Stop();
+    }
+
+    #endregion
+
+
 }

@@ -15,41 +15,41 @@
                             <div class="form-group">
                                 <label for="lines">Lines</label>
 
-                                <input type="text" class="form-control" id="lines" @bind-value="@SpinnerOptions.Lines" disabled="@FormDisabled">
+                                <input type="text" class="form-control" id="lines" @bind-value="@Spinner.Lines" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="length">Length</label>
-                                <input type="text" class="form-control" id="length" @bind="SpinnerOptions.Length" disabled="@FormDisabled">
+                                <input type="text" class="form-control" id="length" @bind="Spinner.Length" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="width">Width</label>
-                                <input type="text" class="form-control" id="width" @bind="SpinnerOptions.Width" disabled="@FormDisabled">
+                                <input type="text" class="form-control" id="width" @bind="Spinner.Width" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="radius">Radius</label>
-                                <input type="number" class="form-control" id="radius" @bind-value="SpinnerOptions.Radius" disabled="@FormDisabled">
+                                <input type="number" class="form-control" id="radius" @bind-value="Spinner.Radius" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="scale">Scale</label>
-                                <input type="number" class="form-control" id="scale" @bind="SpinnerOptions.Scale" disabled="@FormDisabled">
+                                <input type="number" class="form-control" id="scale" @bind="Spinner.Scale" disabled="@FormDisabled">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="corners">Corners</label>
-                                <input type="number" class="form-control" id="corners" @bind="SpinnerOptions.Corners" disabled="@FormDisabled">
+                                <input type="number" class="form-control" id="corners" @bind="Spinner.Corners" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="speed">Speed</label>
-                                <input type="number" class="form-control" id="speed" @bind="SpinnerOptions.Speed" disabled="@FormDisabled">
+                                <input type="number" class="form-control" id="speed" @bind="Spinner.Speed" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="rotate">Rotate</label>
-                                <input type="number" class="form-control" id="rotate" @bind="SpinnerOptions.Rotate" disabled="@FormDisabled">
+                                <input type="number" class="form-control" id="rotate" @bind="Spinner.Rotate" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="animation">Animation</label>
-                                <select id="animation" class="form-control" @bind="SpinnerOptions.Animation" disabled="@FormDisabled">
+                                <select id="animation" class="form-control" @bind="Spinner.Animation" disabled="@FormDisabled">
                                     @foreach (var item in Animations)
                                     {
                                         <option value="@item.Value">@item.Text</option>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="direction">Direction</label>
-                                <select id="direction" class="form-control" @bind="SpinnerOptions.Direction" disabled="@FormDisabled">
+                                <select id="direction" class="form-control" @bind="Spinner.Direction" disabled="@FormDisabled">
                                     @foreach (var item in SpinDirection)
                                     {
                                         <option value="@item.Value">@item.Text</option>
@@ -69,23 +69,23 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="color">Color</label>
-                                <input type="color" class="form-control" id="color" @bind="SpinnerOptions.Color" disabled="@FormDisabled">
+                                <input type="color" class="form-control" id="color" @bind="Spinner.Color" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="fade-color">Fade Color</label>
-                                <input type="color" class="form-control" id="fade-color" @bind="SpinnerOptions.FadeColor" disabled="@FormDisabled">
+                                <input type="color" class="form-control" id="fade-color" @bind="Spinner.FadeColor" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="top">Top</label>
-                                <input type="text" class="form-control" id="top" @bind="SpinnerOptions.Top" disabled="@FormDisabled">
+                                <input type="text" class="form-control" id="top" @bind="Spinner.Top" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="left">Left</label>
-                                <input type="text" class="form-control" id="left" @bind="SpinnerOptions.Left" disabled="@FormDisabled">
+                                <input type="text" class="form-control" id="left" @bind="Spinner.Left" disabled="@FormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="shadow">Shadow</label>
-                                <input type="text" class="form-control" id="shadow" @bind="SpinnerOptions.Shadow" disabled="@FormDisabled">
+                                <input type="text" class="form-control" id="shadow" @bind="Spinner.Shadow" disabled="@FormDisabled">
                             </div>
                         </div>
                     </div>
