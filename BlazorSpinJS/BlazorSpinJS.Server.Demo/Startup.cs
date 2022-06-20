@@ -28,6 +28,7 @@ namespace BlazorSpinJS.Server.Demo
             {
                 options.Color = "#61b551";
                 options.Direction = SpinDirection.CounterClockwise;
+                options.Position = Position.Fixed;
 
             });
         }
