@@ -233,7 +233,8 @@ by injecting a `SpinnerOptions` class into the *SpinnerOptions* parameter
 
  builder.Services.AddBlazorSpinner(options =>
  {
-     options.Lines = 1;
+	
+         options.Lines = 1;
 	 options.Length = 13;
 	 options.Width = 6;
 	 options.Radius = 12;
@@ -243,7 +244,7 @@ by injecting a `SpinnerOptions` class into the *SpinnerOptions* parameter
 	 options.Rotate = 10;
 	 options.Animation = Animation.FadeDefault;
 	 options.Direction = SpinDirection.CounterClockwise;
-     options.Color = "#61b551";
+         options.Color = "#61b551";
 	 options.FadeColor = "#FFFFFF";
 	 options.Top = "50%";
 	 options.Left = "50%";
