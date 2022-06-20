@@ -1,38 +1,51 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Mike Eckel</Authors>
-    <Company>Netcodr</Company>
-    <PackageProjectUrl>https://github.com/Netcodr81/BlazorSpinJS</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Netcodr81/BlazorSpinJS</RepositoryUrl>
-    <PackageIcon>NetcordIcon48px.png</PackageIcon>
-    <PackageIconUrl />
-    <Description>BlazorSpinner is a spinner component based on the spin.js javascript package</Description>
-    <PackageLicenseExpression></PackageLicenseExpression>
-    <PackageLicenseFile>MIT License.txt</PackageLicenseFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Mike Eckel</Authors>
+		<Company>Netcodr</Company>
+		<PackageProjectUrl>https://github.com/Netcodr81/BlazorSpinJS</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Netcodr81/BlazorSpinJS</RepositoryUrl>
+		<PackageIcon>NetcodrIcon256px.png</PackageIcon>
+		<PackageIconUrl />
+		<Description>BlazorSpinner is a spinner component based on the spin.js javascript package</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<ApplicationIcon>NetcodrIcon256px.ico</ApplicationIcon>
+		<Version>2.0.0</Version>
+		<PackageReleaseNotes>This is a complete overhaul of the BlazorSpinJS package. The package has been updated to .NET 6. All spinner configurations are done in the Startup.cs or Program.cs. See the  repository for more information</PackageReleaseNotes>
+	</PropertyGroup>
 
-  
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Content Include="NetcodrIcon256px.ico" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CustomEnumBuilder" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.8" />
-  </ItemGroup>
+	<ItemGroup>
+	  <None Include="..\Icons\NetcodrIcon256px.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\..\..\..\Downloads\MIT License.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\..\..\..\..\Downloads\NetcordIcon48px.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CustomEnumBuilder" Version="1.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.6" />
+	</ItemGroup>
+
+	<!--<ItemGroup>
+		<None Include="..\..\..\..\..\Downloads\MIT License.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\..\..\..\Downloads\NetcordIcon48px.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>-->
 
 </Project>

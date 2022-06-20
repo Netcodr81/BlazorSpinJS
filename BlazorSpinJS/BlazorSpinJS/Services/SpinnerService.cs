@@ -1,37 +1,37 @@
-﻿using BlazorSpinJS.Configuration;
-using Microsoft.JSInterop;
+﻿using BlazorSpinJS.Components;
 using System;
-using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BlazorSpinJS.Services
+namespace BlazorSpinJS.Services;
+
+public class SpinnerService : ISpinnerService
 {
-    public class SpinnerService : ISpinnerService
-    {           
-        //public SpinnerOptions SpinnerOptions { get; set; }
 
-        public event Action Spin;
 
-        public event Action NoSpin;
+    public event Action Spin;
 
-        public event Action SetSpinner;
+    public event Action<Spinner> DynamicConfigSpin;
 
-        public void StartSpinner()
-        {
-            Spin?.Invoke();
-        }
+    public event Action NoSpin;
 
-        public void StopSpinner()
-        {
-            NoSpin?.Invoke();
-        }
+    public event Action<Spinner> SetSpinner;
 
-        public void ResetSpinner()
-        {
-            SetSpinner?.Invoke();
-        }
+    public void StartSpinner()
+    {
+        Spin?.Invoke();
+    }
+
+    public void StartSpinner(Spinner options)
+    {
+        DynamicConfigSpin?.Invoke(options);
+    }
+
+    public void StopSpinner()
+    {
+        NoSpin?.Invoke();
+    }
+
+    public void ResetSpinner(Spinner spinnerToReset)
+    {
+        SetSpinner?.Invoke(spinnerToReset);
     }
 }

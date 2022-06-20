@@ -1,115 +1,106 @@
-﻿using BlazorSpinJS.Configuration;
+﻿using BlazorSpinJS.Components;
 using BlazorSpinJS.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace BlazorSpinJS.Server.Demo.Pages
+namespace BlazorSpinJS.Server.Demo.Pages;
+
+public partial class SpinnerConfiguration : ComponentBase
 {
-    public partial class SpinnerConfiguration : ComponentBase
+    [Inject]
+    public ISpinnerService SpinnerService { get; set; }
+
+    [Inject]
+    public ISpinnerOptionsService SpinnerOptionsService { get; set; }
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    public Spinner Spinner { get; set; }
+
+
+    private List<SelectListItem> Animations { get; set; } = new List<SelectListItem>();
+
+    private List<SelectListItem> SpinDirection { get; set; } = new List<SelectListItem>();
+
+    private bool IsSpinning = false;
+
+    private bool StartDisabled { get; set; } = false;
+    public bool StopDisabled { get; set; } = false;
+
+    public bool ResetDisabled { get; set; } = false;
+
+    public bool DownloadDisabled { get; set; } = false;
+
+    public bool FormDisabled { get; set; } = false;
+
+
+    protected override void OnInitialized()
     {
-        [Inject]
-        public ISpinnerService SpinnerService { get; set; }
+        Animations.Add(new SelectListItem() { Text = "Fade Default", Value = "spinner-line-fade-default", Selected = true });
+        Animations.Add(new SelectListItem() { Text = "Fade Quick", Value = "spinner-line-fade-quick" });
+        Animations.Add(new SelectListItem() { Text = "Fade More", Value = "spinner-line-fade-more" });
+        Animations.Add(new SelectListItem() { Text = "Shrink", Value = "spinner-line-shrink" });
 
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
+        SpinDirection.Add(new SelectListItem() { Text = "Clockwise", Value = "1" });
+        SpinDirection.Add(new SelectListItem() { Text = "Counter Clockwise", Value = "-1" });
 
-        [CascadingParameter]
-        public SpinnerOptions SpinnerOptions { get; set; }      
-       
-        [CascadingParameter]
-        public EventCallback<SpinnerOptions> OnSpinnerOptionsChanged { get; set; }
-
-        private List<SelectListItem> Animations { get; set; } = new List<SelectListItem>();
-
-        private List<SelectListItem> SpinDirection { get; set; } = new List<SelectListItem>();
-
-        private bool IsSpinning = false;
-
-        private bool StartDisabled { get; set; } = false;
-        public bool StopDisabled { get; set; } = false;
-
-        public bool ResetDisabled { get; set; } = false;
-
-        public bool DownloadDisabled { get; set; } = false;
-
-        public bool FormDisabled { get; set; } = false;
+        Spinner = SpinnerOptionsService.GetSpinner();
+    }
 
 
-        protected override void OnInitialized()
+    private void StartSpinner()
+    {
+        if (!IsSpinning)
         {
-            Animations.Add(new SelectListItem() { Text = "Fade Default", Value = "spinner-line-fade-default", Selected = true });
-            Animations.Add(new SelectListItem() { Text = "Fade Quick", Value = "spinner-line-fade-quick" });
-            Animations.Add(new SelectListItem() { Text = "Fade More", Value = "spinner-line-fade-more" });
-            Animations.Add(new SelectListItem() { Text = "Shrink", Value = "spinner-line-shrink" });
-
-            SpinDirection.Add(new SelectListItem() { Text = "Clockwise", Value = "1"});
-            SpinDirection.Add(new SelectListItem() { Text = "Counter Clockwise", Value = "-1" });
-
-         
+            SpinnerService.StartSpinner(Spinner);
+            IsSpinning = !IsSpinning;
+            StopDisabled = false;
+            ResetDisabled = true;
+            StartDisabled = true;
+            DownloadDisabled = true;
+            FormDisabled = true;
         }
 
+    }
 
-        private void StartSpinner()
+    private void StopSpinner()
+    {
+        if (IsSpinning)
         {
-            if (!IsSpinning)
-            {
-                SpinnerService.StartSpinner();
-                IsSpinning = !IsSpinning;
-                StopDisabled = false;
-                ResetDisabled = true;
-                StartDisabled = true;
-                DownloadDisabled = true;
-                FormDisabled = true;
-            }
-         
+            SpinnerService.StopSpinner();
+            IsSpinning = !IsSpinning;
+            StopDisabled = false;
+            ResetDisabled = false;
+            StartDisabled = false;
+            DownloadDisabled = false;
+            FormDisabled = false;
         }
 
-        private void StopSpinner()
-        {
-            if (IsSpinning)
-            {
-                SpinnerService.StopSpinner();
-                IsSpinning = !IsSpinning;
-                StopDisabled = false;
-                ResetDisabled = false;
-                StartDisabled = false;
-                DownloadDisabled = false;
-                FormDisabled = false;
-            }
-         
-        }  
-        
-        private void ResetValues()
-        {
-            StopSpinner();
-            SpinnerService.ResetSpinner();
-            StateHasChanged();
-            Alert("Spinner reset");
+    }
 
-        }
+    private void ResetValues()
+    {
+        StopSpinner();
+        SpinnerService.ResetSpinner(Spinner);
+        StateHasChanged();
+        Alert("Spinner reset");
 
-        private void Alert(string message)
-        {
-            JSRuntime.InvokeVoidAsync("window.alert", message);
-        }
+    }
 
-        //https://wellsb.com/csharp/aspnet/blazor-jsinterop-save-file/
-        private void DownloadValues()
-        {
-            var fileContent = JsonConvert.SerializeObject(SpinnerOptions);
+    private void Alert(string message)
+    {
+        JSRuntime.InvokeVoidAsync("window.alert", message);
+    }
 
-            JSRuntime.InvokeAsync<object>("FileSaveAsJson", "SpinnerSettings.json", fileContent);
-        }
+    //https://wellsb.com/csharp/aspnet/blazor-jsinterop-save-file/
+    private void DownloadValues()
+    {
+        var fileContent = JsonConvert.SerializeObject(Spinner);
+
+        JSRuntime.InvokeAsync<object>("FileSaveAsJson", "SpinnerSettings.json", fileContent);
     }
 }

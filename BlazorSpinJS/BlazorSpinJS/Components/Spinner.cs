@@ -1,12 +1,8 @@
-﻿namespace BlazorSpinJS.Configuration;
+﻿using System.Text.Json;
 
-public class SpinnerOptions
+namespace BlazorSpinJS.Components;
+public class Spinner
 {
-    public SpinnerOptions()
-    {
-
-    }
-
     /// <summary>
     ///  The number of lines to draw
     /// </summary>
@@ -50,12 +46,12 @@ public class SpinnerOptions
     /// <summary>
     ///  The CSS animation name for the lines
     /// </summary>
-    public Animation Animation { get; set; } = Animation.FadeQuick;
+    public string Animation { get; set; } = "spinner-line-fade-quick";
 
     /// <summary>
     ///  1 : clockwise, -1: counter clockwise
     /// </summary>
-    public SpinDirection Direction { get; set; } = SpinDirection.Clockwise;
+    public int Direction { get; set; } = 1;
 
     /// <summary>
     ///  CSS color or array of colors
@@ -95,10 +91,11 @@ public class SpinnerOptions
     /// <summary>
     ///  Element positioning
     /// </summary>
-    public Position Position { get; set; } = Position.Absolute;
+    public string Position { get; set; } = "absolute";
 
 
-
+    public string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
+    }
 }
-
-

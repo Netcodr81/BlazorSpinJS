@@ -1,17 +1,21 @@
-﻿using System;
+﻿using BlazorSpinJS.Components;
+using System;
 
-namespace BlazorSpinJS.Services
+namespace BlazorSpinJS.Services;
+
+public interface ISpinnerService
 {
-    public interface ISpinnerService
-    {  
 
-        event Action Spin;
-        event Action NoSpin;
-        event Action SetSpinner;
+    event Action Spin;
+    event Action<Spinner> DynamicConfigSpin;
+    event Action NoSpin;
+    event Action<Spinner> SetSpinner;
 
-        void StartSpinner();
-        void StopSpinner();
+    void StartSpinner();
 
-        void ResetSpinner();
-    }
+    void StartSpinner(Spinner options);
+
+    void StopSpinner();
+
+    void ResetSpinner(Spinner spinnerToReset);
 }
